@@ -1,5 +1,9 @@
 apply plugin: 'com.android.application'
 
+static def releaseTime() {
+    return new Date().format("yyyyMMdd", TimeZone.getTimeZone("UTC"))
+}
+
 android {
     compileSdkVersion 26
     defaultConfig {
@@ -10,12 +14,28 @@ android {
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
+    signingConfigs {
+        release {
+            storeFile file("myapp.keystore")
+            storePassword KEYSTORE_PASSWORD
+            keyAlias "keyalias"
+            keyPassword KEY_PASSWORD
+        }
+    }
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
+        debug {
+            //应对multidex的问题,sdk设置为21,加快速度
+            minifyEnabled false
+            zipAlignEnabled false
+            shrinkResources false
+            debuggable true
+        }
     }
+
 }
 
 dependencies {
