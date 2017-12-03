@@ -33,7 +33,7 @@ public class ToastUitl {
         if (toast == null) {
             view=LayoutInflater.from(BaseApplication.getAppContext()).inflate(R.layout.toast_common, null);
             toast = new Toast(BaseApplication.getAppContext());
-            TextView textView = (TextView) view.findViewById(R.id.toast_message);
+            TextView textView = view.findViewById(R.id.toast_message);
             textView.setText(message);
             toast.setDuration(duration);
             toast.setView(view);
@@ -115,9 +115,9 @@ public class ToastUitl {
             toast2 = new Toast(BaseApplication.getAppContext());
         }
         View view = LayoutInflater.from(BaseApplication.getAppContext()).inflate(R.layout.toast_custom, null);
-        TextView tv = (TextView) view.findViewById(R.id.toast_custom_tv);
+        TextView tv = view.findViewById(R.id.toast_custom_tv);
         tv.setText(TextUtils.isEmpty(tvStr) ? "" : tvStr);
-        ImageView iv = (ImageView) view.findViewById(R.id.toast_custom_iv);
+        ImageView iv = view.findViewById(R.id.toast_custom_iv);
         if (imageResource > 0) {
             iv.setVisibility(View.VISIBLE);
             iv.setImageResource(imageResource);
